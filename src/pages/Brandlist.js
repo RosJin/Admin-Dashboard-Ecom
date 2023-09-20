@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Table } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import { getBrands } from "../features/brand/brandSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -15,6 +15,7 @@ const columns = [
     {
         title: "Name",
         dataIndex: "name",
+        sorter: (a,b) => a.name.length - b.name.length,
     },
     {
         title: "Action",
