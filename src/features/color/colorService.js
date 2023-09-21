@@ -1,13 +1,13 @@
-// import axios from "axios";
-// import { base_url } from "../../utils/base_url";
+import axios from "axios";
+import { base_url } from "../../utils/base_url";
 
-// const getProductCategories = async () => {
-//     const response = await axios.get(`${base_url}category/`);
+const getColors = async () => {
+    const response = await axios.get(`${base_url}color/`);
 
-//     return response.data;
-// };
+    return response.data;
+};
 
-// const pCategoryService = {
-//     getProductCategories,
-// };
-// export default pCategoryService;
+const colorService = {
+    getColors,
+};
+export default colorService;

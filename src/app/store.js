@@ -4,8 +4,10 @@ import customerReducer from "../features/customers/customerSlice";
 import productReducer from "../features/product/productSlice";
 import brandReducer from "../features/brand/brandSlice";
 import pCategoryReducer from '../features/pcategory/pcategorySlice';
-import blogReducer from '../features/blogs/blogSlice';
 import bCategoryReducer from '../features/bcategory/bcategorySlice';
+import blogReducer from '../features/blogs/blogSlice';
+import colorReducer from '../features/color/colorSlice';
+import enquiryReducer from '../features/enquiry/enquirySlice'
 
 
 export const store = configureStore({
@@ -17,5 +19,7 @@ export const store = configureStore({
         pCategory: pCategoryReducer,
         bCategory: bCategoryReducer,
         blog: blogReducer,
+        color: colorReducer,
+        enquiry: enquiryReducer,
     },
 });
