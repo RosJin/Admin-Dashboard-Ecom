@@ -6,6 +6,8 @@ import {
     AiOutlineUser,
     AiOutlineBgColors,
 } from "react-icons/ai";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Outlet } from "react-router-dom";
 import { BiCategoryAlt } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
@@ -210,7 +212,7 @@ const MainLayout = () => {
                                         to="/">
                                         Signout
                                     </Link>
-                                </li>                                
+                                </li>
                             </div>
                         </div>
                     </div>
@@ -222,6 +224,18 @@ const MainLayout = () => {
                         minHeight: 280,
                         background: colorBgContainer,
                     }}>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={250}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
                     <Outlet />
                 </Content>
             </Layout>
