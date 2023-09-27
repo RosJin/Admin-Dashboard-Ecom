@@ -1,6 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import enquiryService from './enquiryService'
-
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
+import enquiryService from "./enquiryService";
 
 export const getEnquiries = createAsyncThunk(
     "enquiry/get-enquiries",
@@ -12,6 +11,8 @@ export const getEnquiries = createAsyncThunk(
         }
     },
 );
+
+export const resetState = createAction("Reset_all");
 
 const initialState = {
     enquiries: [],
@@ -34,14 +35,15 @@ export const enquirySlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.isSuccess = true;
-                state.enquiries= action.payload;
+                state.enquiries = action.payload;
             })
             .addCase(getEnquiries.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.isSuccess = false;
                 state.message = action.error;
-            });
+            })
+            .addCase(resetState, () => initialState);
     },
 });
 

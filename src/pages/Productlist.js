@@ -5,7 +5,6 @@ import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../features/product/productSlice";
 import { Link } from "react-router-dom";
-
 const columns = [
     {
         title: "SNo",
@@ -14,17 +13,17 @@ const columns = [
     {
         title: "Title",
         dataIndex: "title",
-        sorter: (a,b) => a.title.length - b.title.length,
+        sorter: (a, b) => a.title.length - b.title.length,
     },
     {
         title: "Brand",
         dataIndex: "brand",
-        sorter: (a,b) => a.brand.length - b.brand.length,
+        sorter: (a, b) => a.brand.length - b.brand.length,
     },
     {
         title: "Category",
         dataIndex: "category",
-        sorter: (a,b) => a.category.length - b.category.length,
+        sorter: (a, b) => a.category.length - b.category.length,
     },
     {
         title: "Color",
@@ -33,7 +32,7 @@ const columns = [
     {
         title: "Price",
         dataIndex: "price",
-        sorter: (a,b) => a.price - b.price,
+        sorter: (a, b) => a.price - b.price,
     },
     {
         title: "Action",
@@ -54,14 +53,14 @@ const Productlist = () => {
             title: productState[i].title,
             brand: productState[i].brand,
             category: productState[i].category,
-            color: productState[i].color,
+            color: productState[i].color.join(', '),
             price: `${productState[i].price}`,
             action: (
                 <>
-                    <Link to='/' className="fs-3 text-danger">
+                    <Link to="/" className=" fs-3 text-danger">
                         <BiEdit />
                     </Link>
-                    <Link to='/' className="ms-3 fs-3 text-danger">
+                    <Link className="ms-3 fs-3 text-danger" to="/">
                         <AiFillDelete />
                     </Link>
                 </>

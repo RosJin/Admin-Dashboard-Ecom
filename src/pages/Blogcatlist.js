@@ -28,6 +28,7 @@ const Blogcatlist = () => {
         dispatch(getCategories());
     }, []);
     const bCatState = useSelector((state) => state.bCategory.bCategories);
+
     const data1 = [];
     for (let i = 0; i < bCatState.length; i++) {
         data1.push({
@@ -35,25 +36,25 @@ const Blogcatlist = () => {
             name: bCatState[i].title,
             action: (
                 <>
-                    <Link to="/" className="fs-3 text-danger">
+                    <Link to="/" className=" fs-3 text-danger">
                         <BiEdit />
                     </Link>
-                    <Link to="/" className="ms-3 fs-3 text-danger">
+                    <Link to="/" className=" fs-3 text-danger">
                         <AiFillDelete />
                     </Link>
                 </>
             ),
         });
-        return (
-            <div>
-                <h3 className="mb-4 title">Blog Categories</h3>
-                <div>
-                    <Table columns={columns} dataSource={data1} />
-                </div>
-            </div>
-        );
     }
-  
+
+    return (
+        <div>
+            <h3 className="mb-4 title">Blog Categories</h3>
+            <div>
+                <Table columns={columns} dataSource={data1} />
+            </div>
+        </div>
+    );
 };
 
 export default Blogcatlist;
