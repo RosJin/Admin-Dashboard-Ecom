@@ -4,7 +4,11 @@ import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteABlogCat, getCategories, resetState } from "../features/bcategory/bcategorySlice";
+import {
+    deleteABlogCat,
+    getCategories,
+    resetState,
+} from "../features/bcategory/bcategorySlice";
 import CustomModal from "../components/CustomModal";
 
 const columns = [
@@ -37,11 +41,10 @@ const Blogcatlist = () => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-      dispatch(resetState())
+        dispatch(resetState());
         dispatch(getCategories());
     }, []);
     const bCatState = useSelector((state) => state.bCategory.bCategories);
-    console.log(bCatState);
     const data1 = [];
     for (let i = 0; i < bCatState.length; i++) {
         data1.push({
@@ -63,13 +66,13 @@ const Blogcatlist = () => {
             ),
         });
     }
-const deleteBlogCategory = (e)=>{
-  dispatch(deleteABlogCat(e))
-  setOpen(false)
-  setTimeout(()=>{
-    dispatch(getCategories())
-  },100)
-}
+    const deleteBlogCategory = (e) => {
+        dispatch(deleteABlogCat(e));
+        setOpen(false);
+        setTimeout(() => {
+            dispatch(getCategories());
+        }, 100);
+    };
     return (
         <div>
             <h3 className="mb-4 title">Blog Categories</h3>
