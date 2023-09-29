@@ -23,7 +23,7 @@ export const createNewblogCat = createAsyncThunk(
     },
 );
 
-export const resetState = createAction("Reset_all")
+export const resetState = createAction("Reset_all");
 
 const initialState = {
     bCategories: [],
@@ -69,6 +69,7 @@ export const bCategorySlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
             })
+
             .addCase(resetState, () => initialState);
     },
 });

@@ -24,32 +24,32 @@ export const createCoupon = createAsyncThunk(
 export const deleteACoupon = createAsyncThunk(
   "coupon/delete-coupon",
   async (id, thunkAPI) => {
-    try {
-      return await couponService.deleteCoupon(id);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
+      try {
+          return await couponService.deleteCoupon(id);
+      } catch (error) {
+          return thunkAPI.rejectWithValue(error);
+      }
+  },
 );
 export const getACoupon = createAsyncThunk(
   "coupon/get-coupon",
   async (id, thunkAPI) => {
-    try {
-      return await couponService.getCoupon(id);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
+      try {
+          return await couponService.getCoupon(id);
+      } catch (error) {
+          return thunkAPI.rejectWithValue(error);
+      }
+  },
 );
 export const updateACoupon = createAsyncThunk(
   "color/update-coupon",
   async (coupon, thunkAPI) => {
-    try {
-      return await couponService.updateCoupon(coupon);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
+      try {
+          return await couponService.updateCoupon(coupon);
+      } catch (error) {
+          return thunkAPI.rejectWithValue(error);
+      }
+  },
 );
 export const resetState = createAction("Reset_all");
 
@@ -118,9 +118,9 @@ export const couponSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.couponName = action.payload[0].name;
-        state.couponDiscount = action.payload[0].discount;
-        state.couponExpiry = action.payload[0].expiry;
+        state.couponName = action.payload.name;
+        state.couponDiscount = action.payload.discount;
+        state.couponExpiry = action.payload.expiry;
       })
       .addCase(getACoupon.rejected, (state, action) => {
         state.isLoading = false;
@@ -135,9 +135,7 @@ export const couponSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.couponName = action.payload[0].name;
-        state.couponDiscount = action.payload[0].discount;
-        state.couponExpiry = action.payload[0].expiry;
+        state.updatedCoupon = action.payload;
       })
       .addCase(updateACoupon.rejected, (state, action) => {
         state.isLoading = false;

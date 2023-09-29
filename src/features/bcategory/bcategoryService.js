@@ -14,8 +14,11 @@ const createBlogCategory = async (bcat) => {
     return response.data;
 };
 
+
+
 const bCategoryService = {
     getBlogCategories,
     createBlogCategory,
+   
 };
 export default bCategoryService;

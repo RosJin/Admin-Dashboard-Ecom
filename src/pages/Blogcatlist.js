@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories } from "../features/bcategory/bcategorySlice";
 
@@ -16,6 +16,7 @@ const columns = [
         dataIndex: "name",
         sorter: (a, b) => a.name.length - b.name.length,
     },
+
     {
         title: "Action",
         dataIndex: "action",
@@ -28,7 +29,7 @@ const Blogcatlist = () => {
         dispatch(getCategories());
     }, []);
     const bCatState = useSelector((state) => state.bCategory.bCategories);
-
+    console.log(bCatState);
     const data1 = [];
     for (let i = 0; i < bCatState.length; i++) {
         data1.push({
@@ -36,10 +37,10 @@ const Blogcatlist = () => {
             name: bCatState[i].title,
             action: (
                 <>
-                    <Link to="/" className=" fs-3 text-danger">
+                    <Link className=" fs-3 text-danger">
                         <BiEdit />
                     </Link>
-                    <Link to="/" className=" fs-3 text-danger">
+                    <Link to="/" className=" fs-3 text-danger ">
                         <AiFillDelete />
                     </Link>
                 </>
