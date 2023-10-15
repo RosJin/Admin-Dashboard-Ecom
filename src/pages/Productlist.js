@@ -53,7 +53,7 @@ const Productlist = () => {
             title: productState[i].title,
             brand: productState[i].brand,
             category: productState[i].category,
-            color: productState[i].color.join(', '),
+            color: productState[i].color + ", ",
             price: `${productState[i].price}`,
             action: (
                 <>

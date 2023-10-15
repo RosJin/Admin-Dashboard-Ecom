@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../features/auth/authSlice";
+import { getMonthlyData, getOrders, getYearlyData, login } from "../features/auth/authSlice";
+
 
 let schema = Yup.object().shape({
     email: Yup.string()
@@ -32,6 +33,9 @@ const Login = () => {
     const { user, isError, isSuccess, isLoading, message } = authState.auth;
     useEffect(() => {
         if (isSuccess) {
+            // dispatch(getMonthlyData())
+            // dispatch(getYearlyData())
+            // dispatch(getOrders())
             navigate("admin");
         } else {
             navigate("");
@@ -82,9 +86,7 @@ const Login = () => {
                     <div className="error mt-2">
                         {formik.touched.password && formik.errors.password}
                     </div>
-                    <div className="mb-3 text-end">
-                        <Link to="forgot-password">Forgot Password</Link>
-                    </div>
+                   
                     <button
                         className="border-0 px-3 py-2 text-white fw-bold w-100 text-center text-decoration-none fs-5"
                         style={{ background: "#ffd333" }}
