@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -13,7 +13,12 @@ import { getColors } from "../features/color/colorSlice";
 import { Select } from "antd";
 import Dropzone from "react-dropzone";
 import { delImg, uploadImg } from "../features/upload/uploadSlice";
-import { createProducts, resetState } from "../features/product/productSlice";
+import {
+    createProducts,
+    getAProduct,
+    resetState,
+    updateAProduct,
+} from "../features/product/productSlice";
 let schema = yup.object().shape({
     title: yup.string().required("Title is Required"),
     description: yup.string().required("Description is Required"),
@@ -21,19 +26,21 @@ let schema = yup.object().shape({
     brand: yup.string().required("Brand is Required"),
     category: yup.string().required("Category is Required"),
     tags: yup.string().required("Tag is Required"),
-    color: yup
-        .array()
-        .min(1, "Pick at least one color")
-        .required("Color is Required"),
+    // color: yup
+    //     .array()
+    //     .min(1, "Pick at least one color")
+    //     .required("Color is Required"),
     quantity: yup.number().required("Quantity is Required"),
 });
 
 const Addproduct = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [color, setColor] = useState([]);
+    // const [color, setColor] = useState([]);
     const [images, setImages] = useState([]);
-    console.log(color);
+    const location = useLocation();
+    const getProductId = location.pathname.split("/")[3];
+
     useEffect(() => {
         dispatch(getBrands());
         dispatch(getCategories());
@@ -42,28 +49,55 @@ const Addproduct = () => {
 
     const brandState = useSelector((state) => state.brand.brands);
     const catState = useSelector((state) => state.pCategory.pCategories);
-    const colorState = useSelector((state) => state.color.colors);
+    // const colorState = useSelector((state) => state.color.colors);
     const imgState = useSelector((state) => state.upload.images);
     const newProduct = useSelector((state) => state.product);
-    const { isSuccess, isError, isLoading, createdProduct } = newProduct;
+    const {
+        isSuccess,
+        isError,
+        isLoading,
+        createdProduct,
+        updatedProduct,
+        productTitle,
+        productDes,
+        productPrice,
+        productCate,
+        productBrand,
+        productTags,
+        productQuantity,
+        productImg,
+    } = newProduct;
+
+    useEffect(() => {
+        if (getProductId !== undefined) {
+            dispatch(getAProduct(getProductId));
+            img.push(productImg)
+        } else {
+            dispatch(resetState());
+        }
+    }, [getProductId]);
 
     useEffect(() => {
         if (isSuccess && createdProduct) {
             toast.success("Product Added Successfullly!");
+        }
+        if (isSuccess && updatedProduct) {
+            toast.success("Product Updated Successfullly!");
+            navigate("/admin/list-product");
         }
         if (isError) {
             toast.error("Something Went Wrong!");
         }
     }, [isSuccess, isError, isLoading]);
 
-    const coloropt = [];
+    // const coloropt = [];
 
-    colorState.forEach((i) => {
-        coloropt.push({
-            label: i.title,
-            value: i._id,
-        });
-    });
+    // colorState.forEach((i) => {
+    //     coloropt.push({
+    //         label: i.title,
+    //         value: i._id,
+    //     });
+    // });
     const img = [];
     imgState.forEach((i) => {
         img.push({
@@ -73,40 +107,49 @@ const Addproduct = () => {
     });
 
     useEffect(() => {
-        formik.values.color = color ? color : " ";
+        // formik.values.color = color ? color : " ";
         formik.values.images = img;
-    }, [color, img]);
+    }, [productImg]);
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
-            title: "",
-            description: "",
-            price: "",
-            brand: "",
-            category: "",
-            tags: "",
-            color: "",
-            quantity: "",
-            images: "",
+            title: productTitle || "",
+            description: productDes || "",
+            price: productPrice || "",
+            brand: productBrand || "",
+            category: productCate || "",
+            tags: productTags || "",
+            // color: productName || "",
+            quantity: productQuantity || "",
+            images: productImg || "",
         },
         validationSchema: schema,
         onSubmit: (values) => {
-            dispatch(createProducts(values));
-            formik.resetForm();
-            setColor(null);
-            setTimeout(() => {
+            if (getProductId !== undefined) {
+                const data = { id: getProductId, productData: values };
+                dispatch(updateAProduct(data));
                 dispatch(resetState());
-            }, 3000);
+            } else {
+                dispatch(createProducts(values));
+                formik.resetForm();
+                // setColor(null);
+                setTimeout(() => {
+                    dispatch(resetState());
+                }, 3000);
+            }
         },
     });
 
-    const handleColors = (e) => {
-        setColor(e);
-    };
+    // const handleColors = (e) => {
+    //     setColor(e);
+    // };
 
     return (
         <div>
-            <h3 className="mb-4 title">Add Product</h3>
+            <h3 className="mb-4 title">
+                {getProductId !== undefined ? "Edit" : "Add"} Product
+            </h3>
             <div>
                 <form
                     onSubmit={formik.handleSubmit}
@@ -201,7 +244,7 @@ const Addproduct = () => {
                         {formik.touched.tags && formik.errors.tags}
                     </div>
 
-                    <Select
+                    {/* <Select
                         mode="multiple"
                         allowClear
                         className="w-100"
@@ -212,7 +255,7 @@ const Addproduct = () => {
                     />
                     <div className="error">
                         {formik.touched.color && formik.errors.color}
-                    </div>
+                    </div> */}
                     <CustomInput
                         type="number"
                         label="Enter Product Quantity"
@@ -269,7 +312,7 @@ const Addproduct = () => {
                     <button
                         className="btn btn-success border-0 rounded-3 my-5"
                         type="submit">
-                        Add Product
+                        {getProductId !== undefined ? "Edit" : "Add"} Product
                     </button>
                 </form>
             </div>
