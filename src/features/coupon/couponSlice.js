@@ -42,7 +42,7 @@ export const getACoupon = createAsyncThunk(
   },
 );
 export const updateACoupon = createAsyncThunk(
-  "color/update-coupon",
+  "coupon/update-coupon",
   async (coupon, thunkAPI) => {
       try {
           return await couponService.updateCoupon(coupon);

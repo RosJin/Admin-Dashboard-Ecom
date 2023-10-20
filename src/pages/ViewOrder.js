@@ -24,10 +24,6 @@ const columns = [
         dataIndex: "count",
     },
     {
-        title: "Color",
-        dataIndex: "color",
-    },
-    {
         title: "Amount",
         dataIndex: "amount",
     },
@@ -50,9 +46,6 @@ const ViewOrder = () => {
             brand: orderState?.orderItems[i]?.product.brand,
             count: orderState?.orderItems[i]?.quantity,
             amount: orderState?.orderItems[i]?.price,
-            color: orderState?.orderItems[i]?.color?.title,
-            
-            
         });
     }
     return (

@@ -9,7 +9,6 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands } from "../features/brand/brandSlice";
 import { getCategories } from "../features/pcategory/pcategorySlice";
-import { getColors } from "../features/color/colorSlice";
 import { Select } from "antd";
 import Dropzone from "react-dropzone";
 import { delImg, uploadImg } from "../features/upload/uploadSlice";
@@ -26,30 +25,18 @@ let schema = yup.object().shape({
     brand: yup.string().required("Brand is Required"),
     category: yup.string().required("Category is Required"),
     tags: yup.string().required("Tag is Required"),
-    // color: yup
-    //     .array()
-    //     .min(1, "Pick at least one color")
-    //     .required("Color is Required"),
     quantity: yup.number().required("Quantity is Required"),
 });
 
 const Addproduct = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const [color, setColor] = useState([]);
-    const [images, setImages] = useState([]);
+    // const [images, setImages] = useState([]);
     const location = useLocation();
     const getProductId = location.pathname.split("/")[3];
 
-    useEffect(() => {
-        dispatch(getBrands());
-        dispatch(getCategories());
-        dispatch(getColors());
-    }, []);
-
     const brandState = useSelector((state) => state.brand.brands);
     const catState = useSelector((state) => state.pCategory.pCategories);
-    // const colorState = useSelector((state) => state.color.colors);
     const imgState = useSelector((state) => state.upload.images);
     const newProduct = useSelector((state) => state.product);
     const {
@@ -78,6 +65,12 @@ const Addproduct = () => {
     }, [getProductId]);
 
     useEffect(() => {
+        dispatch(getBrands());
+        dispatch(getCategories());
+        dispatch(resetState())
+    }, []);
+
+    useEffect(() => {
         if (isSuccess && createdProduct) {
             toast.success("Product Added Successfullly!");
         }
@@ -90,14 +83,7 @@ const Addproduct = () => {
         }
     }, [isSuccess, isError, isLoading]);
 
-    // const coloropt = [];
 
-    // colorState.forEach((i) => {
-    //     coloropt.push({
-    //         label: i.title,
-    //         value: i._id,
-    //     });
-    // });
     const img = [];
     imgState.forEach((i) => {
         img.push({
@@ -107,7 +93,6 @@ const Addproduct = () => {
     });
 
     useEffect(() => {
-        // formik.values.color = color ? color : " ";
         formik.values.images = img;
     }, [productImg]);
 
@@ -120,9 +105,8 @@ const Addproduct = () => {
             brand: productBrand || "",
             category: productCate || "",
             tags: productTags || "",
-            // color: productName || "",
             quantity: productQuantity || "",
-            images: productImg || "",
+            images: {},
         },
         validationSchema: schema,
         onSubmit: (values) => {
@@ -133,17 +117,13 @@ const Addproduct = () => {
             } else {
                 dispatch(createProducts(values));
                 formik.resetForm();
-                // setColor(null);
                 setTimeout(() => {
                     dispatch(resetState());
-                }, 3000);
+                }, 300);
             }
         },
     });
 
-    // const handleColors = (e) => {
-    //     setColor(e);
-    // };
 
     return (
         <div>
@@ -243,19 +223,6 @@ const Addproduct = () => {
                     <div className="error">
                         {formik.touched.tags && formik.errors.tags}
                     </div>
-
-                    {/* <Select
-                        mode="multiple"
-                        allowClear
-                        className="w-100"
-                        placeholder="Select colors"
-                        defaultValue={color}
-                        onChange={(i) => handleColors(i)}
-                        options={coloropt}
-                    />
-                    <div className="error">
-                        {formik.touched.color && formik.errors.color}
-                    </div> */}
                     <CustomInput
                         type="number"
                         label="Enter Product Quantity"
