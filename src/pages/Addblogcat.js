@@ -12,7 +12,7 @@ import {
     updateABlogCat,
 } from "../features/bcategory/bcategorySlice";
 let schema = yup.object().shape({
-    title: yup.string().required("Category Name is Required"),
+    title: yup.string().required("Vui lòng nhập tên loại tin"),
 });
 const Addblogcat = () => {
     const dispatch = useDispatch();
@@ -39,14 +39,14 @@ const Addblogcat = () => {
 
     useEffect(() => {
         if (isSuccess && createBlogCategory) {
-            toast.success("Blog Category Added Successfullly!");
+            toast.success("Thêm loại tin thành công!");
         }
         if (isSuccess && updatedBlogCategory) {
-            toast.success("Blog Category Updated Successfullly!");
+            toast.success("Cập nhật loại tin thành công!");
             navigate("/admin/blog-category-list");
         }
         if (isError) {
-            toast.error("Something Went Wrong!");
+            toast.error("Có lỗi xảy ra!");
         }
     }, [isSuccess, isError, isLoading]);
     const formik = useFormik({
@@ -72,7 +72,7 @@ const Addblogcat = () => {
     return (
         <div>
             <h3 className="mb-4  title">
-                {getBlogCatId !== undefined ? "Edit" : "Add"} Blog Category
+                {getBlogCatId !== undefined ? "Sửa" : "Thêm"} Loại Tin
             </h3>
             <div>
                 <form action="" onSubmit={formik.handleSubmit}>
@@ -82,7 +82,7 @@ const Addblogcat = () => {
                         onCh={formik.handleChange("title")}
                         onBl={formik.handleBlur("title")}
                         val={formik.values.title}
-                        label="Enter Blog Category"
+                        label="Nhập tên loại tin"
                         id="blogcat"
                     />
                     <div className="error">
@@ -91,8 +91,7 @@ const Addblogcat = () => {
                     <button
                         className="btn btn-success border-0 rounded-3 my-5"
                         type="submit">
-                        {getBlogCatId !== undefined ? "Edit" : "Add"} Blog
-                        Category
+                        {getBlogCatId !== undefined ? "Sửa" : "Thêm"} Loại Tin
                     </button>
                 </form>
             </div>

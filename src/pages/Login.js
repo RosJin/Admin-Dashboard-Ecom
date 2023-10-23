@@ -9,9 +9,9 @@ import { getMonthlyData, getOrders, getYearlyData, login } from "../features/aut
 
 let schema = Yup.object().shape({
     email: Yup.string()
-        .email("Email Should be valid")
-        .required("Email is Required"),
-    password: Yup.string().required("Password is Required"),
+        .email("Email phải hợp lệ")
+        .required("Vui lòng nhập email"),
+    password: Yup.string().required("Vui lòng nhập mật khẩu"),
 });
 
 const Login = () => {
@@ -54,20 +54,20 @@ const Login = () => {
             <br />
             <br />
             <div className="my-5 w-25 bg-white rounded-3 mx-auto p-4">
-                <h3 className="text-center title">Login</h3>
+                <h3 className="text-center title">Đăng nhập</h3>
                 <p className="text-center">
-                    Login to your account to continue.
+                    Vui lòng đăng nhập để tiếp tục.
                 </p>
                 <div className="error text-center">
                     {message.message === "Rejected"
-                        ? "You are not an Admin"
+                        ? "Bạn không phải quản trị viên"
                         : ""}
                 </div>
                 <form action="" onSubmit={formik.handleSubmit}>
                     <CustomInput
                         type="text"
                         name="email"
-                        label="Email Address"
+                        label="Nhập Email"
                         id="email"
                         val={formik.values.email}
                         onCh={formik.handleChange("email")}
@@ -78,7 +78,7 @@ const Login = () => {
                     <CustomInput
                         type="password"
                         name="password"
-                        label="Password"
+                        label="Mật khẩu"
                         id="pass"
                         val={formik.values.password}
                         onCh={formik.handleChange("password")}
@@ -91,7 +91,7 @@ const Login = () => {
                         className="border-0 px-3 py-2 text-white fw-bold w-100 text-center text-decoration-none fs-5"
                         style={{ background: "#ffd333" }}
                         type="submit">
-                        Login
+                        Đăng nhập
                     </button>
                 </form>
             </div>

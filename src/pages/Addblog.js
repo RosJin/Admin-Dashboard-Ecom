@@ -18,9 +18,9 @@ import {
 import { getCategories } from "../features/bcategory/bcategorySlice";
 
 let schema = yup.object().shape({
-    title: yup.string().required("Title is Required"),
-    description: yup.string().required("Description is Required"),
-    category: yup.string().required("Category is Required"),
+    title: yup.string().required("Vui lòng nhập tên tin"),
+    description: yup.string().required("Vui lòng nhập nội dung tin"),
+    category: yup.string().required("Vui lòng chọn loại tin"),
 });
 const Addblog = () => {
     const dispatch = useDispatch();
@@ -58,14 +58,14 @@ const Addblog = () => {
 
     useEffect(() => {
         if (isSuccess && createdBlog) {
-            toast.success("Blog Added Successfullly!");
+            toast.success("Thêm tin thành công!");
         }
         if (isSuccess && updatedBlog) {
-            toast.success("Blog Update Successfullly!");
+            toast.success("Cập nhật tin thành công!");
             navigate("/admin/blog-list");
         }
         if (isError) {
-            toast.error("Something Went Wrong!");
+            toast.error("Có lỗi xảy ra!");
         }
     }, [isSuccess, isError, isLoading]);
 
@@ -108,7 +108,7 @@ const Addblog = () => {
     return (
         <div>
             <h3 className="mb-4 title">
-                {getBlogId !== undefined ? "Edit" : "Add"} Blog
+                {getBlogId !== undefined ? "Sửa" : "Thêm"} Tin
             </h3>
 
             <div className="">
@@ -116,7 +116,7 @@ const Addblog = () => {
                     <div className="mt-4">
                         <CustomInput
                             type="title"
-                            label="Enter Blog Title"
+                            label="Nhập tên tin"
                             name="title"
                             onCh={formik.handleChange("title")}
                             onBl={formik.handleBlur("title")}
@@ -133,7 +133,7 @@ const Addblog = () => {
                         value={formik.values.category}
                         className="form-control py-3  mt-3"
                         id="">
-                        <option value="">Select Blog Category</option>
+                        <option value="">Chon loại tin</option>
                         {bCatState.map((i, j) => {
                             return (
                                 <option key={j} value={i.title}>
@@ -166,8 +166,7 @@ const Addblog = () => {
                                     <div {...getRootProps()}>
                                         <input {...getInputProps()} />
                                         <p>
-                                            Drag 'n' drop some files here, or
-                                            click to select files
+                                            Kéo thả hoặc nhấp vào đây để chọn ảnh
                                         </p>
                                     </div>
                                 </section>
@@ -202,7 +201,7 @@ const Addblog = () => {
                     <button
                         className="btn btn-success border-0 rounded-3 my-5"
                         type="submit">
-                        {getBlogId !== undefined ? "Edit" : "Add"} Blog
+                        {getBlogId !== undefined ? "Sửa" : "Thêm"} Tin
                     </button>
                 </form>
             </div>

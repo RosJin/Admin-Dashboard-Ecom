@@ -19,13 +19,13 @@ import {
     updateAProduct,
 } from "../features/product/productSlice";
 let schema = yup.object().shape({
-    title: yup.string().required("Title is Required"),
-    description: yup.string().required("Description is Required"),
-    price: yup.number().required("Price is Required"),
-    brand: yup.string().required("Brand is Required"),
-    category: yup.string().required("Category is Required"),
-    tags: yup.string().required("Tag is Required"),
-    quantity: yup.number().required("Quantity is Required"),
+    title: yup.string().required("Vui lòng nhập tên sản phẩm"),
+    description: yup.string().required("Vui lòng nhập mô tả sản phẩm"),
+    price: yup.number().required("Vui lòng nhập giá sản phẩm"),
+    brand: yup.string().required("Vui lòng chọn thương hiệu"),
+    category: yup.string().required("Vui lòng chọn loại sản phẩm"),
+    tags: yup.string().required("Vui lòng chọn đặc điểm sản phẩm"),
+    quantity: yup.number().required("Vui lòng nhập số lượng sản phẩm"),
 });
 
 const Addproduct = () => {
@@ -72,14 +72,14 @@ const Addproduct = () => {
 
     useEffect(() => {
         if (isSuccess && createdProduct) {
-            toast.success("Product Added Successfullly!");
+            toast.success("Thêm sản phẩm thành công!");
         }
         if (isSuccess && updatedProduct) {
-            toast.success("Product Updated Successfullly!");
+            toast.success("Cập nhật sản phẩm thành công!");
             navigate("/admin/list-product");
         }
         if (isError) {
-            toast.error("Something Went Wrong!");
+            toast.error("Có lỗi xảy ra!");
         }
     }, [isSuccess, isError, isLoading]);
 
@@ -128,7 +128,7 @@ const Addproduct = () => {
     return (
         <div>
             <h3 className="mb-4 title">
-                {getProductId !== undefined ? "Edit" : "Add"} Product
+                {getProductId !== undefined ? "Sửa" : "Thêm"} Sản Phẩm
             </h3>
             <div>
                 <form
@@ -136,7 +136,7 @@ const Addproduct = () => {
                     className="d-flex gap-3 flex-column">
                     <CustomInput
                         type="text"
-                        label="Enter Product Title"
+                        label="Nhập tên sản phẩm"
                         name="title"
                         onCh={formik.handleChange("title")}
                         obBl={formik.handleBlur("title")}
@@ -159,7 +159,7 @@ const Addproduct = () => {
                     </div>
                     <CustomInput
                         type="number"
-                        label="Enter Product Price"
+                        label="Nhập giá sản phẩm"
                         name="price"
                         onCh={formik.handleChange("price")}
                         obBl={formik.handleBlur("price")}
@@ -175,7 +175,7 @@ const Addproduct = () => {
                         value={formik.values.brand}
                         className="form-control py-3 mb-3"
                         id="">
-                        <option value="">Select Brand</option>
+                        <option value="">Chọn thương hiệu</option>
                         {brandState.map((i, j) => {
                             return (
                                 <option key={j} value={i.title}>
@@ -194,7 +194,7 @@ const Addproduct = () => {
                         value={formik.values.category}
                         className="form-control py-3 mb-3"
                         id="">
-                        <option value="">Select Category</option>
+                        <option value="">Chọn loại sản phẩm</option>
                         {catState.map((i, j) => {
                             return (
                                 <option key={j} value={i.title}>
@@ -214,18 +214,18 @@ const Addproduct = () => {
                         className="form-control py-3 mb-3"
                         id="">
                         <option value="" disabled>
-                            Select Category
+                            Chọn đặc điểm sản phẩm
                         </option>
                         <option value="featured">Featured</option>
-                        <option value="popular">Popular</option>
-                        <option value="special">Special</option>
+                        <option value="popular">Phổ biến</option>
+                        <option value="special">Đặc biệt</option>
                     </select>
                     <div className="error">
                         {formik.touched.tags && formik.errors.tags}
                     </div>
                     <CustomInput
                         type="number"
-                        label="Enter Product Quantity"
+                        label="Nhập số lượng"
                         name="quantity"
                         onCh={formik.handleChange("quantity")}
                         obBl={formik.handleBlur("quantity")}
@@ -244,8 +244,7 @@ const Addproduct = () => {
                                     <div {...getRootProps()}>
                                         <input {...getInputProps()} />
                                         <p>
-                                            Drag 'n' drop some files here, or
-                                            click to select files
+                                            Kéo thả hoặc nhấp vào đây để chọn ảnh
                                         </p>
                                     </div>
                                 </section>
@@ -279,7 +278,7 @@ const Addproduct = () => {
                     <button
                         className="btn btn-success border-0 rounded-3 my-5"
                         type="submit">
-                        {getProductId !== undefined ? "Edit" : "Add"} Product
+                        {getProductId !== undefined ? "Sửa" : "Thêm"} Sản Phẩm
                     </button>
                 </form>
             </div>

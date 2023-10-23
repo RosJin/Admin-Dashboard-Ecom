@@ -11,27 +11,27 @@ import {
 
 const columns = [
     {
-        title: "SNo",
+        title: "STT",
         dataIndex: "key",
     },
     {
-        title: "Name",
+        title: "Tên",
         dataIndex: "name",
     },
     {
-        title: "Product Count",
+        title: "Số lượng sản phẩm",
         dataIndex: "product",
     },
     {
-        title: "Total Price",
+        title: "Tổng giá tiền",
         dataIndex: "price",
     },
     {
-        title: "Total Price After Discount",
+        title: "Tổng giá tiền sau giảm giá",
         dataIndex: "dprice",
     },
     {
-        title: "Status",
+        title: "Trạng thái",
         dataIndex: "status",
     },
 ];
@@ -40,7 +40,7 @@ const Dashboard = () => {
     const dispatch = useDispatch();
     const monthlyDataState = useSelector((state) => state.auth.monthlyData);
     const yearlyDataState = useSelector((state) => state.auth.yearlyData);
-    const orderState = useSelector((state) => state.auth.orders.orders);
+    const orderState = useSelector((state) => state.auth?.orders?.orders);
     const [dataMonthly, setDataMonthly] = useState([]);
     const [dataMonthlySales, setDataMonthlySales] = useState([]);
     const [orderData, setOrderData] = useState([]);
@@ -66,18 +66,18 @@ const Dashboard = () => {
 
     useEffect(() => {
         let monthNames = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December",
+            "Tháng Một",
+            "Tháng Hai",
+            "Tháng Ba",
+            "Tháng Tư",
+            "Tháng Năm",
+            "Tháng Sáu",
+            "Tháng Bảy",
+            "Tháng Tám",
+            "Tháng Chín",
+            "Tháng Mười",
+            "Tháng Mười Một",
+            "Tháng Mười Hai",
         ];
         let data = [];
         let monthlyOrderCount = [];
@@ -181,7 +181,7 @@ const Dashboard = () => {
             <div className="d-flex justify-content-between align-items-center gap-3">
                 <div className="d-flex p-3 justify-content-between align-items-end flex-grow-1 bg-white p-3 roudned-3">
                     <div>
-                        <p className="desc">Total Income</p>
+                        <p className="desc">Tổng thu nhập</p>
                         <h4 className="mb-0 sub-title">
                             ${yearlyDataState && yearlyDataState[0]?.amount}
                         </h4>
@@ -194,7 +194,7 @@ const Dashboard = () => {
                 </div>
                 <div className="d-flex p-3 justify-content-between align-items-end flex-grow-1 bg-white p-3 roudned-3">
                     <div>
-                        <p className="desc">Total Sales</p>
+                        <p className="desc">Tổng số lượng hàng đã bán</p>
                         <h4 className="mb-0 sub-title">
                             {yearlyDataState && yearlyDataState[0]?.count}
                         </h4>
@@ -208,20 +208,20 @@ const Dashboard = () => {
             </div>
             <div className="d-flex justify-content-between gap-3">
                 <div className="mt-4 flex-grow-1 w-50">
-                    <h3 className="mb-5 title">Income Statics</h3>
+                    <h3 className="mb-5 title">Thống kê thu nhập</h3>
                     <div>
                         <Column {...config} />
                     </div>
                 </div>
                 <div className="mt-4 flex-grow-1 w-50">
-                    <h3 className="mb-5 title">Sales Statics</h3>
+                    <h3 className="mb-5 title">Thống kê bán hàng</h3>
                     <div>
                         <Column {...config2} />
                     </div>
                 </div>
             </div>
             <div className="mt-4">
-                <h3 className="mb-5 title">Recent Orders</h3>
+                <h3 className="mb-5 title">Các đơn đặt hàng gần đây</h3>
                 <div>
                     <Table columns={columns} dataSource={orderData} />
                 </div>

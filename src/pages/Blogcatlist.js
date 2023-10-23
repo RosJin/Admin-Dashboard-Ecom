@@ -13,17 +13,17 @@ import CustomModal from "../components/CustomModal";
 
 const columns = [
     {
-        title: "SNo",
+        title: "STT",
         dataIndex: "key",
     },
     {
-        title: "Name",
+        title: "Tên loại tin",
         dataIndex: "name",
         sorter: (a, b) => a.name.length - b.name.length,
     },
 
     {
-        title: "Action",
+        title: "Chỉnh sửa hoặc xóa",
         dataIndex: "action",
     },
 ];
@@ -75,7 +75,7 @@ const Blogcatlist = () => {
     };
     return (
         <div>
-            <h3 className="mb-4 title">Blog Categories</h3>
+            <h3 className="mb-4 title">Danh sách loại tin</h3>
             <div>
                 <Table columns={columns} dataSource={data1} />
             </div>
@@ -85,7 +85,7 @@ const Blogcatlist = () => {
                 performAction={() => {
                     deleteBlogCategory(blogCatId);
                 }}
-                title="Are you sure you want to delete this blog category"
+                title="Bạn có chắc chắn muốn xóa loại tin này không?"
             />
         </div>
     );

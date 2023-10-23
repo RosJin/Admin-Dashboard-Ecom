@@ -13,11 +13,11 @@ import CustomModal from "../components/CustomModal";
 
 const columns = [
     {
-        title: "SNo",
+        title: "STT",
         dataIndex: "key",
     },
     {
-        title: "Name",
+        title: "Tên",
         dataIndex: "name",
     },
     {
@@ -25,16 +25,16 @@ const columns = [
         dataIndex: "email",
     },
     {
-        title: "Mobile",
+        title: "Số điện thoại",
         dataIndex: "mobile",
     },
     {
-        title: "Status",
+        title: "Trạng thái",
         dataIndex: "status",
     },
 
     {
-        title: "Action",
+        title: "Xem hoặc xóa",
         dataIndex: "action",
     },
 ];
@@ -78,10 +78,10 @@ const Enquiries = () => {
                         onChange={(e) =>
                             setEnquiryStatus(e.target.value, enqState[i]._id)
                         }>
-                        <option value="Submitted">Submitted</option>
-                        <option value="Contacted">Contacted</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Resolved">Resolved</option>
+                        <option value="Submitted">Đã gửi</option>
+                        <option value="Contacted">Đã liên hệ</option>
+                        <option value="In Progress">Trong tiến trình</option>
+                        <option value="Resolved">Đã giải quyết</option>
                     </select>
                 </>
             ),
@@ -114,7 +114,7 @@ const Enquiries = () => {
     };
     return (
         <div>
-            <h3 className="mb-4 title">Enquiries</h3>
+            <h3 className="mb-4 title">Hỏi đáp</h3>
             <div>
                 <Table columns={columns} dataSource={data1} />
             </div>
@@ -124,7 +124,7 @@ const Enquiries = () => {
                 performAction={() => {
                     deleteEnq(enqId);
                 }}
-                title="Are you sure you want to delete this enquiry?"
+                title="Bạn có chắc chắn muốn xóa câu hỏi này không?"
             />
         </div>
     );

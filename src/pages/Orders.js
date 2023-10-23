@@ -8,27 +8,27 @@ import { getOrders, updateAOrder } from "../features/auth/authSlice";
 
 const columns = [
     {
-        title: "SNo",
+        title: "STT",
         dataIndex: "key",
     },
     {
-        title: "Name",
+        title: "Tên",
         dataIndex: "name",
     },
     {
-        title: "Product",
+        title: "Sản phẩm",
         dataIndex: "product",
     },
     {
-        title: "Amount",
+        title: "Tổng số tiền",
         dataIndex: "amount",
     },
     {
-        title: "Date",
+        title: "Ngày đặt",
         dataIndex: "date",
     },
     {
-        title: "Action",
+        title: "Hành trình đơn hàng",
         dataIndex: "action",
     },
 ];
@@ -46,7 +46,7 @@ const Orders = () => {
             name: orderState[i]?.user?.firstname,
             product: (
                 <Link to={`/admin/order/${orderState[i]?._id}`}>
-                    View Orders
+                    Xem đơn hàng
                 </Link>
             ),
             amount: orderState[i]?.totalPrice,
@@ -64,15 +64,15 @@ const Orders = () => {
                         }
                         className="form-control form-select"
                         id="">
-                        <option value="Ordered" disabled selected>
-                            Ordered
+                        <option value="Đã đặt hàng" disabled selected>
+                            Đã đặt hàng
                         </option>
-                        <option value="Processed">Processed</option>
-                        <option value="Shipped">Shipped</option>
-                        <option value="Out For Dilivery">
-                            Out For Dilivery
+                        <option value="Đơn hàng đang được chuẩn bị">Đơn hàng đang được chuẩn bị</option>
+                        <option value="Người vận chuyển đã lấy hàng">Người vận chuyển đã lấy hàng</option>
+                        <option value="Đơn hàng đang giao đến bạn">
+                            Đơn hàng đang giao đến bạn
                         </option>
-                        <option value="Delivered">Delivered</option>
+                        <option value="Đã giao hàng thành công">Đã giao hàng thành công</option>
                     </select>
                 </>
             ),
@@ -83,7 +83,7 @@ const Orders = () => {
     }
     return (
         <div>
-            <h3 className="mb-4 title">Orders</h3>
+            <h3 className="mb-4 title">Danh sách đơn đặt hàng</h3>
             <div>
                 <Table columns={columns} dataSource={data1} />
             </div>

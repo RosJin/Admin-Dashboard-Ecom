@@ -9,19 +9,19 @@ import CustomModal from "../components/CustomModal";
 
 const columns = [
     {
-        title: "SNo",
+        title: "STT",
         dataIndex: "key",
     },
     {
-        title: "Title",
+        title: "Tên tin",
         dataIndex: "name",
     },
     {
-        title: "Category",
+        title: "Loại tin",
         dataIndex: "category",
     },
     {
-        title: "Action",
+        title: "Chỉnh sửa hoặc xóa",
         dataIndex: "action",
     },
 ];
@@ -75,7 +75,7 @@ const Bloglist = () => {
     }
     return (
         <div>
-            <h3 className="mb-4 title">Blogs list</h3>
+            <h3 className="mb-4 title">Danh sách tin tức</h3>
             <div>
                 <Table columns={columns} dataSource={data1} />
             </div>
@@ -85,7 +85,7 @@ const Bloglist = () => {
                 performAction={() => {
                     deleteBlog(blogId);
                 }}
-                title="Are you sure you want to delete this blog?"
+                title="Bạn có chắc chắn muốn xóa tin này không?"
             />
         </div>
     );

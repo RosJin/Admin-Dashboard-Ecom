@@ -5,11 +5,11 @@ import { getUsers } from "../features/customers/customerSlice";
 
 const columns = [
     {
-        title: "SNo",
+        title: "STT",
         dataIndex: "key",
     },
     {
-        title: "Name",
+        title: "Tên",
         dataIndex: "name",
         sorter: (a,b) => a.name.length - b.name.length,
     },
@@ -18,7 +18,7 @@ const columns = [
         dataIndex: "email",
     },
     {
-        title: "Mobile",
+        title: "Số điện thoại",
         dataIndex: "mobile",
     },
 ];
@@ -43,7 +43,7 @@ const Customers = () => {
 
     return (
         <div>
-            <h3 className="mb-4 title">Customers</h3>
+            <h3 className="mb-4 title">Danh sách khách hàng</h3>
             <div>
                 <Table columns={columns} dataSource={data1} />
             </div>

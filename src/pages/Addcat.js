@@ -13,7 +13,7 @@ import {
 } from "../features/pcategory/pcategorySlice";
 
 let schema = yup.object().shape({
-    title: yup.string().required("Category Name is Required"),
+    title: yup.string().required("Vui lòng nhập tên loại sản phẩm"),
 });
 
 const Addcat = () => {
@@ -41,14 +41,14 @@ const Addcat = () => {
 
     useEffect(() => {
         if (isSuccess && createdCategory) {
-            toast.success("Category Added Successfullly!");
+            toast.success("Thêm loại sản phẩm thành công!");
         }
         if (isSuccess && updatedCategory) {
-            toast.success("Category Updated Successfullly!");
+            toast.success("Cập nhật loại sản phẩm thành công!");
             navigate("/admin/list-category");
         }
         if (isError) {
-            toast.error("Something Went Wrong!");
+            toast.error("Có lỗi xảy ra!");
         }
     }, [isSuccess, isError, isLoading]);
 
@@ -75,13 +75,13 @@ const Addcat = () => {
     return (
         <div>
             <h3 className="mb-4 title">
-                {getPCatId !== undefined ? "Edit" : "Add"} Category
+                {getPCatId !== undefined ? "Sửa" : "Thêm"} Loại Sản Phẩm
             </h3>
             <div>
                 <form action="" onSubmit={formik.handleSubmit}>
                     <CustomInput
                         type="text"
-                        label="Enter Product Category"
+                        label="Nhập tên loại sản phẩm"
                         name="title"
                         onCh={formik.handleChange("title")}
                         onBl={formik.handleBlur("title")}
@@ -94,7 +94,7 @@ const Addcat = () => {
                     <button
                         className="btn btn-success border-0 rounded-3 my-5"
                         type="submit">
-                        {getPCatId !== undefined ? "Edit" : "Add"} Category
+                        {getPCatId !== undefined ? "Sửa" : "Thêm"} Loại Sản Phẩm
                     </button>
                 </form>
             </div>

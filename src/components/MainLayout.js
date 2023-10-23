@@ -31,8 +31,8 @@ const MainLayout = () => {
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo">
                     <h2 className="text-white fs-5  text-center py-3 mb-0">
-                        <span className="sm-logo">SHK</span>
-                        <span className="lg-logo">Store HUYKHA</span>
+                        <span className="sm-logo">HK</span>
+                        <span className="lg-logo">Computer HK</span>
                     </h2>
                 </div>
                 <Menu
@@ -56,53 +56,53 @@ const MainLayout = () => {
                         {
                             key: "customers",
                             icon: <AiOutlineUser className="fs-4" />,
-                            label: "Customers",
+                            label: "Danh sách khách hàng",
                         },
                         {
                             key: "Catalog",
                             icon: <AiOutlineShoppingCart className="fs-4" />,
-                            label: "Catalog",
+                            label: "Danh mục",
                             children: [
                                 {
                                     key: "product",
                                     icon: (
                                         <AiOutlineShoppingCart className="fs-4" />
                                     ),
-                                    label: "Add Product",
+                                    label: "Thêm sản phẩm",
                                 },
                                 {
                                     key: "list-product",
                                     icon: (
                                         <AiOutlineShoppingCart className="fs-4" />
                                     ),
-                                    label: "Product List",
+                                    label: "DS sản phẩm",
                                 },
                                 {
                                     key: "brand",
                                     icon: <SiBrandfolder className="fs-4" />,
-                                    label: "Brand",
+                                    label: "Thương hiệu",
                                 },
                                 {
                                     key: "list-brand",
                                     icon: <SiBrandfolder className="fs-4" />,
-                                    label: "Brand-List",
+                                    label: "DS thương hiệu",
                                 },
                                 {
                                     key: "category",
                                     icon: <BiCategoryAlt className="fs-4" />,
-                                    label: "Category",
+                                    label: "Loại sản phẩm",
                                 },
                                 {
                                     key: "list-category",
                                     icon: <BiCategoryAlt className="fs-4" />,
-                                    label: "Category List",
+                                    label: "DS loại sản phẩm",
                                 },
                             ],
                         },
                         {
                             key: "orders",
                             icon: <FaClipboardList className="fs-4" />,
-                            label: "Orders",
+                            label: "Đơn đặt hàng",
                         },
                         {
                             key: "marketing",
@@ -124,39 +124,39 @@ const MainLayout = () => {
                         {
                             key: "blogs",
                             icon: <FaBloggerB className="fs-4" />,
-                            label: "Blogs",
+                            label: "Tin tức",
                             children: [
                                 {
                                     key: "blog",
                                     icon: <ImBlog className="fs-4" />,
-                                    label: "Add Blog",
+                                    label: "Thêm tin tức",
                                 },
                                 {
                                     key: "blog-list",
                                     icon: <FaBloggerB className="fs-4" />,
-                                    label: "Blog List",
+                                    label: "DS tin tức",
                                 },
                                 {
                                     key: "blog-category",
                                     icon: <ImBlog className="fs-4" />,
-                                    label: "Add Blog Category",
+                                    label: "Thêm loại tin tức",
                                 },
                                 {
                                     key: "blog-category-list",
                                     icon: <FaBloggerB className="fs-4" />,
-                                    label: "Blog Category List",
+                                    label: "DS loại tin tức",
                                 },
                             ],
                         },
                         {
                             key: "enquiries",
                             icon: <FaClipboardList className="fs-4" />,
-                            label: "Enquiries",
+                            label: "Hỏi đáp",
                         },
                         {
                             key: "signout",
                             icon: <AiOutlineLogout className="fs-4" />,
-                            label: "Sign Out",
+                            label: "Đăng xuất",
                         },
                     ]}
                 />

@@ -8,23 +8,23 @@ import { getOrder, getOrderByUser, getOrders, login } from "../features/auth/aut
 
 const columns = [
     {
-        title: "SNo",
+        title: "STT",
         dataIndex: "key",
     },
     {
-        title: "Product Name",
+        title: "Tên sản phẩm",
         dataIndex: "name",
     },
     {
-        title: "Brand",
+        title: "Thương hiệu",
         dataIndex: "brand",
     },
     {
-        title: "Count",
+        title: "Số lượng",
         dataIndex: "count",
     },
     {
-        title: "Amount",
+        title: "Giá tiền",
         dataIndex: "amount",
     },
     
@@ -50,7 +50,7 @@ const ViewOrder = () => {
     }
     return (
         <div>
-            <h3 className="mb-4 title">View Order</h3>
+            <h3 className="mb-4 title">Chi tiết đơn hàng</h3>
             <div>
                 <Table columns={columns} dataSource={data1} />
             </div>

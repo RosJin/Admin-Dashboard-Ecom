@@ -13,16 +13,16 @@ import CustomModal from "../components/CustomModal";
 
 const columns = [
     {
-        title: "SNo",
+        title: "STT",
         dataIndex: "key",
     },
     {
-        title: "Name",
+        title: "Tên thương hiệu",
         dataIndex: "name",
         sorter: (a, b) => a.name.length - b.name.length,
     },
     {
-        title: "Action",
+        title: "Chỉnh sửa hoặc xóa",
         dataIndex: "action",
     },
 ];
@@ -77,7 +77,7 @@ const Brandlist = () => {
 
     return (
         <div>
-            <h3 className="mb-4 title">Brands</h3>
+            <h3 className="mb-4 title">Danh sách thương hiệu</h3>
             <div>
                 <Table columns={columns} dataSource={data1} />
             </div>
@@ -87,7 +87,7 @@ const Brandlist = () => {
                 performAction={() => {
                     deleteBrand(brandId);
                 }}
-                title="Are you sure you want to delete this brand?"
+                title="Bạn có chắc chắn muốn xóa thương hiệu này không?"
             />
         </div>
     );
