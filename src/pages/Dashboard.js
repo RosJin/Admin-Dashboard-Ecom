@@ -18,10 +18,10 @@ const columns = [
         title: "Tên",
         dataIndex: "name",
     },
-    {
-        title: "Số lượng sản phẩm",
-        dataIndex: "product",
-    },
+    // {
+    //     title: "Số lượng sản phẩm",
+    //     dataIndex: "product",
+    // },
     {
         title: "Tổng giá tiền",
         dataIndex: "price",
@@ -100,7 +100,7 @@ const Dashboard = () => {
             data1.push({
                 key: i,
                 name: orderState[i].user.firstname + " " + orderState[i].user.lastname,
-                product: orderState[i]?.orderItems[i]?.quantity,
+                // product: orderState[i]?.orderItems[i]?.quantity,
                 price: orderState[i].totalPrice,
                 dprice: orderState[i].totalPriceAfterDiscount,
                 status: orderState[i].orderStatus,
@@ -183,12 +183,12 @@ const Dashboard = () => {
                     <div>
                         <p className="desc">Tổng thu nhập</p>
                         <h4 className="mb-0 sub-title">
-                            ${yearlyDataState && yearlyDataState[0]?.amount}
+                            {yearlyDataState && yearlyDataState[0]?.amount} VND
                         </h4>
                     </div>
                     <div className="d-flex flex-column align-items-end">
                         <p className="mb-0 desc">
-                            Income in Last Year from Today
+                            
                         </p>
                     </div>
                 </div>
@@ -201,7 +201,7 @@ const Dashboard = () => {
                     </div>
                     <div className="d-flex flex-column align-items-end">
                         <p className="mb-0 desc">
-                            Sales in Last Year from Today
+                            
                         </p>
                     </div>
                 </div>
