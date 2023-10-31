@@ -62,7 +62,7 @@ const Productlist = () => {
             title: productState[i].title,
             brand: productState[i].brand,
             category: productState[i].category,
-            price: `${productState[i].price}`,
+            price: `${productState[i].price.toLocaleString('vi-VN')}`,
             action: (
                 <>
                     <Link to={`/admin/product/${productState[i]._id}`} className=" fs-3 text-danger">

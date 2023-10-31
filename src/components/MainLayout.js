@@ -105,23 +105,6 @@ const MainLayout = () => {
                             label: "Đơn đặt hàng",
                         },
                         {
-                            key: "marketing",
-                            icon: <RiCouponLine className="fs-4" />,
-                            label: "Marketing",
-                            children: [
-                                {
-                                    key: "coupon",
-                                    icon: <ImBlog className="fs-4" />,
-                                    label: "Add Coupon",
-                                },
-                                {
-                                    key: "coupon-list",
-                                    icon: <RiCouponLine className="fs-4" />,
-                                    label: "Coupon List",
-                                },
-                            ],
-                        },
-                        {
                             key: "blogs",
                             icon: <FaBloggerB className="fs-4" />,
                             label: "Tin tức",
