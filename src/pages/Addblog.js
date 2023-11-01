@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -8,7 +8,8 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useFormik } from "formik";
+import { useFormik} from "formik";
+
 import {
     createBlogs,
     getABlog,
@@ -45,7 +46,6 @@ const Addblog = () => {
     useEffect(() => {
         if (getBlogId !== undefined) {
             dispatch(getABlog(getBlogId));
-            img.push(blogImages);
         } else {
             dispatch(resetState());
         }
@@ -69,6 +69,8 @@ const Addblog = () => {
         }
     }, [isSuccess, isError, isLoading]);
 
+    
+
     const img = [];
     imgState.forEach((i) => {
         img.push({
@@ -77,9 +79,12 @@ const Addblog = () => {
         });
     });
 
+
+
     useEffect(() => {
-        formik.values.images = img;
-    }, [blogImages]);
+        formik.values.images = [...img, ...(blogImages || [])];
+    }, [img, blogImages]);
+
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -87,7 +92,7 @@ const Addblog = () => {
             title: blogName || "",
             description: blogDesc || "",
             category: blogCategory || "",
-            images: "",
+            images: blogImages,
         },
         validationSchema: schema,
         onSubmit: (values) => {
@@ -104,6 +109,8 @@ const Addblog = () => {
             }
         },
     });
+
+    
 
     return (
         <div>

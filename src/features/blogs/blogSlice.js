@@ -52,6 +52,7 @@ export const deleteABlog = createAsyncThunk(
         }
     },
 );
+
 export const resetState = createAction("Reset_all");
 
 const initialState = {
@@ -108,7 +109,7 @@ export const blogSlice = createSlice({
                 state.blogName = action.payload.title;
                 state.blogDesc = action.payload.description;
                 state.blogCategory = action.payload.category;
-                state.blogImages = action.payload.images;
+                state.blogImages = action.payload?.images;
             })
             .addCase(getABlog.rejected, (state, action) => {
                 state.isLoading = false;

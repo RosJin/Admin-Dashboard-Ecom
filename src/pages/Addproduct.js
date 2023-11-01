@@ -58,7 +58,6 @@ const Addproduct = () => {
     useEffect(() => {
         if (getProductId !== undefined) {
             dispatch(getAProduct(getProductId));
-            img.push(productImg)
         } else {
             dispatch(resetState());
         }
@@ -93,8 +92,8 @@ const Addproduct = () => {
     });
 
     useEffect(() => {
-        formik.values.images = img;
-    }, [productImg]);
+        formik.values.images = [...img, ...(productImg || [])];
+    }, [img,productImg]);
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -106,7 +105,7 @@ const Addproduct = () => {
             category: productCate || "",
             tags: productTags || "",
             quantity: productQuantity || "",
-            images: {},
+            images: productImg,
         },
         validationSchema: schema,
         onSubmit: (values) => {
