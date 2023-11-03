@@ -90,10 +90,10 @@ const Addproduct = () => {
             url: i.url,
         });
     });
-
+    const [newImages, setNewImages] = useState(img)
     useEffect(() => {
-        formik.values.images = [...img, ...(productImg || [])];
-    }, [img,productImg]);
+        // formik.values.images = [...img, ...(productImg || [])];
+    }, [productImg,img,imgState]);
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -111,9 +111,14 @@ const Addproduct = () => {
         onSubmit: (values) => {
             if (getProductId !== undefined) {
                 const data = { id: getProductId, productData: values };
+                data.productData.images = [...data.productData.images,...newImages]
                 dispatch(updateAProduct(data));
                 dispatch(resetState());
             } else {
+                if (!Array.isArray(values.images)) {
+                    values.images = [];
+                }
+                values.images = [...values.images, ...newImages]
                 dispatch(createProducts(values));
                 formik.resetForm();
                 setTimeout(() => {
@@ -215,7 +220,7 @@ const Addproduct = () => {
                         <option value="" disabled>
                             Chọn đặc điểm sản phẩm
                         </option>
-                        <option value="featured">Featured</option>
+                        <option value="featured">Nổi bật</option>
                         <option value="popular">Phổ biến</option>
                         <option value="special">Đặc biệt</option>
                     </select>

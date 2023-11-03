@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useFormik} from "formik";
+import { useFormik } from "formik";
 
 import {
     createBlogs,
@@ -39,7 +39,7 @@ const Addblog = () => {
         blogName,
         blogDesc,
         blogCategory,
-        blogImages,
+        blogImages = [],
         updatedBlog,
     } = blogState;
 
@@ -69,9 +69,8 @@ const Addblog = () => {
         }
     }, [isSuccess, isError, isLoading]);
 
-    
-
     const img = [];
+
     imgState.forEach((i) => {
         img.push({
             public_id: i.public_id,
@@ -79,13 +78,14 @@ const Addblog = () => {
         });
     });
 
-
+    const [newImages, setNewImages] = useState(img)
 
     useEffect(() => {
-        formik.values.images = [...img, ...(blogImages || [])];
-    }, [img, blogImages]);
+
+    }, [blogImages, img, imgState]);
 
 
+    
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -98,9 +98,11 @@ const Addblog = () => {
         onSubmit: (values) => {
             if (getBlogId !== undefined) {
                 const data = { id: getBlogId, blogData: values };
+                data.blogData.images = [...data.blogData.images, ...newImages]
                 dispatch(updateABlog(data));
                 dispatch(resetState());
             } else {
+                values.images = [...values.images, ...newImages]
                 dispatch(createBlogs(values));
                 formik.resetForm();
                 setTimeout(() => {
@@ -110,7 +112,6 @@ const Addblog = () => {
         },
     });
 
-    
 
     return (
         <div>
@@ -173,7 +174,8 @@ const Addblog = () => {
                                     <div {...getRootProps()}>
                                         <input {...getInputProps()} />
                                         <p>
-                                            Kéo thả hoặc nhấp vào đây để chọn ảnh
+                                            Kéo thả hoặc nhấp vào đây để chọn
+                                            ảnh
                                         </p>
                                     </div>
                                 </section>
