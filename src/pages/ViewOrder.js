@@ -27,6 +27,26 @@ const columns = [
         title: "Giá tiền",
         dataIndex: "amount",
     },
+    {
+        title: "Tên",
+        dataIndex:"firstname",
+    },
+    {
+        title: "Họ",
+        dataIndex:"lastname",
+    },
+    {
+        title: "Địa chỉ",
+        dataIndex:"address",
+    },
+    {
+        title: "Thành phố",
+        dataIndex:"city",
+    },
+    {
+        title: "Ghi chú",
+        dataIndex:"other",
+    },
     
 ];
 
@@ -46,6 +66,11 @@ const ViewOrder = () => {
             brand: orderState?.orderItems[i]?.product.brand,
             count: orderState?.orderItems[i]?.quantity,
             amount: orderState?.orderItems[i]?.price,
+            firstname: orderState?.shippingInfo?.firstName,
+            lastname: orderState?.shippingInfo?.lastName,
+            address: orderState?.shippingInfo?.address,
+            city: orderState?.shippingInfo?.city,
+            other: orderState?.shippingInfo?.other,
         });
     }
     return (
